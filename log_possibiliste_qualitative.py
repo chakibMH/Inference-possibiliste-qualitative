@@ -18,6 +18,7 @@ def get_st(BCPondere):
     -------
     st : list
         liste de st.
+        
 
     """
     
