@@ -18,7 +18,6 @@ def get_st(BCPondere):
     -------
     st : list
         liste de st.
-        
 
     """
     
@@ -71,6 +70,8 @@ def create_inter_file(list_st):
     #determiner le nb de formules dans cette st
     nb_formules =len(liste_formules)
     
+    
+    
     #determiner le nb de var dans cette st
     variables = []
     
@@ -115,6 +116,38 @@ def create_inter_file(list_st):
         
         
     return path
+
+def get_negation(var_interet):
+    """
+    
+
+    Parameters
+    ----------
+    var_interet : str
+        le but sous format cnf.
+        
+        
+        calcul la negation du but
+
+    Returns
+    -------
+    str
+        la negation du but sous format snf.
+
+    """
+    
+    els = var_interet.split(" ")
+    
+    prem = int(els[0])
+    
+    prem = -prem
+    
+    els[0] = str(prem)
+    
+    return " ".join(els)
+    
+    
+    
     
 
 def inf_qualitative(st, var_interet):
@@ -129,7 +162,7 @@ def inf_qualitative(st, var_interet):
         variable d'interet .
         
         
-        Fct pour l'inference qualitative 
+        Fct pour  l'inference possibiliste qualitative 
 
     Returns
     -------
@@ -140,34 +173,45 @@ def inf_qualitative(st, var_interet):
     
     #verifier si ca infere
     
+
+    #si ce n'est pas le cas on retourne 0
     path = create_inter_file(st)
-    
     if infere(path, var_interet):
+        #calcul de la negation
+        neg_var_interet = get_negation(var_interet)
+        print("la base infere la variable d'intret...calcul du seuil minimum en cours...")
     
         l = 0
         u = len(st)
         
-        while l < u:
-            
+        while u-l > 1:
+
             r = int((l+u)/2)
+            
             
             #create a temporary file for each st
             path = create_inter_file(st[r:u])
+
             
-            #appel a SAT avec la straight et la negation de la var d interet
-            if infere(path, var_interet):
-                #si c'est consistanct
+            #appel a SAT avec la strate et la negation de la var d interet
+            if infere(path, neg_var_interet) == True:
+                #si c'est consistenct
                 u = r -1 
             else:
-                #si ce n'est pas consistant
+                #si ce n'est pas consistent
                 l = r
-        val = st[r].seuil.iloc[0]
+            print("u == ",u)
+            print("l == ",l)
+        val = st[l].seuil.iloc[0]
+        print("le seuil minimum de certitude de la variable d interet est : ",val)
     else:
         print("la base n infere pas "+var_interet)
         val = 0
     
     return val
     
+
+
 def main(BCPondere, var_interet):
     
     #strate
@@ -175,6 +219,6 @@ def main(BCPondere, var_interet):
     print(st)
     
     # inference
-    #val = inf_qualitative(st, var_interet)
+    val = inf_qualitative(st, var_interet)
     
     
