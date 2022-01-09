@@ -1,0 +1,3 @@
+A and B and -C,0.6
+B and D,0.5
+E and -A,0.9

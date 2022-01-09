@@ -146,7 +146,33 @@ def get_negation(var_interet):
     
     return " ".join(els)
     
+
+def to_cnd_form(exp_log):
     
+    #enlever les espaces
+    
+    exp_log =exp_log.replace(" ","")
+    
+    #transformer au format cnf
+    
+    exp_log =exp_log.replace("and"," ")
+    
+    # tranformer les lettres en num
+    
+    new_exp = ""
+    for c in exp_log:
+        o = ord(c)
+        if o >= 65 and o <= 90:
+            #c un cractere
+            o = o-64
+            new_exp += str(o)
+        else:
+            new_exp+=c
+            
+    
+    #rajouter le 0 a la fin
+    new_exp += " 0"
+    return new_exp
     
     
 
