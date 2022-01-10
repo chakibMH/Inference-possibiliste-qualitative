@@ -23,20 +23,32 @@ def get_st(BCPondere):
     
     #lire la base ponderee
     df = pd.read_csv(BCPondere, header=None, names=["formule","seuil"])
+    c1 = df.apply(lambda x:to_cnd_form(x.formule),axis=1)
+    
+    df_new = pd.DataFrame(data = [c1.values, df.seuil.values])
+    df_new = df_new.T
+    df_new.columns=['formule','seuil' ]
     
     #trier les vals du plus grand au plus petit
-    df.sort_values(by='seuil',  inplace=True)
+    df_new.sort_values(by='seuil',  inplace=True)
     
-    les_seuils = df.seuil.unique()
+    les_seuils = df_new.seuil.unique()
     
     #construire st
     
     st = []
     
     for s in les_seuils:
-        st.append(df.loc[df.seuil == s])
+        st.append(df_new.loc[df_new.seuil == s])
         
-    return st
+        
+    df.sort_values(by='seuil',  inplace=True)
+    les_seuils = df_new.seuil.unique()
+    st_affich = []
+    for s in les_seuils:
+        st_affich.append(df.loc[df.seuil == s])
+        
+    return st,st_affich
 
 def create_inter_file(list_st):
     """
@@ -241,8 +253,9 @@ def inf_qualitative(st, var_interet):
 def main(BCPondere, var_interet):
     
     #strate
-    st = get_st(BCPondere)
+    st,st_affich = get_st(BCPondere)
     print(st)
+    print(st_affich)
     
     # inference
     val = inf_qualitative(st, var_interet)
