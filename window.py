@@ -28,8 +28,8 @@ def btn_clicked():
     for i in range(l):
 
         canvas.create_line(100, a, 400, a, width=2)
-        txt=str(st[i])
-        txt=txt.replace("formule seuil", "")
+        txt=str(st_affich[i])
+        txt=txt.replace("formule  seuil", "")
         txt=txt.replace("\n", "       ")
         widget = Label(canvas, text=txt, fg='black', bg='white')
         widget.pack()
