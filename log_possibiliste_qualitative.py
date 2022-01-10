@@ -3,7 +3,7 @@
 import pandas as pd
 from Res_absurde import infere
 
-def get_st(BCPondere):
+def get_st(BCPondere="RCR_BASE.txt"):
     """
     
 
@@ -223,6 +223,8 @@ def inf_qualitative(st, var_interet):
         u = len(st)
         
         while u-l > 1:
+            print("u == ",u)
+            print("l == ",l)
 
             r = int((l+u)/2)
             
@@ -238,8 +240,7 @@ def inf_qualitative(st, var_interet):
             else:
                 #si ce n'est pas consistent
                 l = r
-            print("u == ",u)
-            print("l == ",l)
+
         val = st[l].seuil.iloc[0]
         print("le seuil minimum de certitude de la variable d interet est : ",val)
     else:
@@ -248,6 +249,10 @@ def inf_qualitative(st, var_interet):
     
     return val
     
+
+def first_step(BaseText):
+    with open("RCR_BASE.txt","w") as f:
+        f.write(BaseText)
 
 
 def main(BCPondere, var_interet):
