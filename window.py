@@ -83,3 +83,6 @@ text4 = Text(
 canvas.create_window(650,500, window=text4)
 
 mainloop()
+
+
+

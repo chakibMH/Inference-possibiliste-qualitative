@@ -12,29 +12,32 @@ def get_st(BCPondere="RCR_BASE.txt"):
     BCPondere : str
         chemin vers BC ponderee.
 
-        Fct qui permet la lecture d'une base de connaissance ponderee
+        Fct qui permet la lecture d'une base de connaissance ponderee, et retourne les 
+        
+        differente strates
         
     Returns
     -------
     st : list
-        liste de st.
+        liste de strates.
 
     """
     
     #lire la base ponderee
     df = pd.read_csv(BCPondere, header=None, names=["formule","seuil"])
-    c1 = df.apply(lambda x:to_cnd_form(x.formule),axis=1)
+    #transformer la base en shema accpte par UBICAST
+    c1 = df.apply(lambda x:to_cnf_form(x.formule),axis=1)
     
     df_new = pd.DataFrame(data = [c1.values, df.seuil.values])
     df_new = df_new.T
     df_new.columns=['formule','seuil' ]
     
-    #trier les vals du plus grand au plus petit
+    #trier les vals du plus grand au plus petit selon le poids
     df_new.sort_values(by='seuil',  inplace=True)
     
     les_seuils = df_new.seuil.unique()
     
-    #construire st
+    #construire straite
     
     st = []
     
@@ -150,24 +153,55 @@ def get_negation(var_interet):
     
     els = var_interet.split(" ")
     
-    prem = int(els[0])
+    print("elt "+els[0])
+    
+    o = els[0].replace("-","")
+    
+    o = ord(o)
+    
+    o = o-64
+    
+    prem = int(o)
+    
+    if "-" in els[0]:
+        prem = - prem
+    
+    print("prem ",prem)
     
     prem = -prem
+    
+    print("-prem ",prem)
     
     els[0] = str(prem)
     
     return " ".join(els)
     
 
-def to_cnd_form(exp_log):
+def to_cnf_form(exp_log):
+    """
     
+
+    Parameters
+    ----------
+    exp_log : str
+        chaine representant la formule disjonctive.
+
+        cette fct permet de faire une chaine de caracteres sous format cnf, acceptee par le solveur SAT,
+        apartie d une chaine en lagage naturel
+
+    Returns
+    -------
+    new_exp : str
+        chaine sous format cnf avec des chiffres au lieu de noms de vars.
+
+    """
     #enlever les espaces
     
     exp_log =exp_log.replace(" ","")
     
     #transformer au format cnf
     
-    exp_log =exp_log.replace("and"," ")
+    exp_log =exp_log.replace("or"," ")
     
     # tranformer les lettres en num
     
@@ -223,8 +257,7 @@ def inf_qualitative(st, var_interet):
         u = len(st)
         
         while u-l > 1:
-            print("u == ",u)
-            print("l == ",l)
+
 
             r = int((l+u)/2)
             
