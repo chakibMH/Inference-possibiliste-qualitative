@@ -1,58 +1,30 @@
+# Possibilistic Inference System
 
-      ##  ##  #####    #####   $$$$$   $$$$   $$$$$$    
-      ##  ##  ##  ##  ##      $$      $$  $$    $$      
-      ##  ##  #####   ##       $$$$   $$$$$$    $$      
-      ##  ##  ##  ##  ##          $$  $$  $$    $$      
-       ####   #####    #####  $$$$$   $$  $$    $$      
-  ======================================================
-  SLS SAT Solver from The University of British Columbia
-  ======================================================
-  ...Developed by Dave Tompkins (davet [@] cs.ubc.ca)...
-  ------------------------------------------------------
-  .......consult legal.txt for legal information........
-  ......consult revisions.txt for revision history......
-  ------------------------------------------------------
-  ... project website: http://www.satlib.org/ubcsat ....
-  ------------------------------------------------------
-  .....e-mail ubcsat-help [@] cs.ubc.ca for support.....
-  ------------------------------------------------------
+This repository contains a **possibilistic inference system** developed during my **first year of Master's studies**. The system is designed to perform **reasoning with weighted knowledge bases** using **CNF (Conjunctive Normal Form) transformations** and a **SAT solver** for inference.
+
+## 📌 Overview
+The goal of this project is to evaluate the **certainty level** of an inferred fact based on a weighted knowledge base. The system processes a list of logical rules, sorts them by confidence levels, and applies **possibilistic reasoning** to determine the strongest inference.
+
+## 🔍 Key Features
+- **Processes weighted knowledge bases** from a text file.
+- **Transforms logical formulas into CNF format**.
+- **Uses a SAT solver** to check logical consistency.
+- **Implements possibilistic inference** to determine the certainty of a conclusion.
+- **Handles negation** and performs binary search on strata (confidence levels).
 
 
-README Release Notes
-====================
+## ⚙️ Installation & Usage
+### Prerequisites
+Ensure you have **Python 3.x** installed along with the required dependencies.
 
-The website should be consulted for the latest news on the ubcsat project
+### Running the Inference System
+To execute the system on a knowledge base file:
+```sh
+python main.py RCR_BASE.txt target_variable
+```
 
-http://www.satlib.org/ubcsat  (or, alternatively, www.cs.ubc.ca/~davet/ubcsat)
+## 📜 License
+This repository is for academic and research purposes. Feel free to explore and modify the code for learning.
 
-* to get started with ubcsat, we recommend you consult the online "Quick Start" guide
-
-* the FAQ may also help with some of your initial questions
-
-* please do not hesitate to contact us via e-mail regarding any
-  questions, problems, suggestions, comments
-
-* To receive updates when new versions of ubcsat are available,
-  and other exciting ubcsat news,
-  we highly recommend you subscribe to our mailing list.
-
-  Note that the mailing list is moderated, spam-free, and and will not be abused.
-  
-  to subscribe, send a message to majordomo@cs.ubc.ca with the text:
-
-    subscribe ubcsat-updates
-
-  as the body (not the header) of the message
-
-
-* If you want to understand how to write code and interface with the code,
-  we suggest you read the paper
-
-  then look at an algorithm implementation (i.e.: walksat-tabu.c) and then...
-
-  for now (more documentation forthcoming) look at code examples on how to use:
-
-  (ubcsat-globals.h) -- describes all the global variables and routines you need
-                     
-  (ubcsat-triggers.h) -- describes the available triggers and their data structures
-
+---
+📌 *For more details, check the documentation in the `/docs` folder.*
