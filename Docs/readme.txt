@@ -1,26 +1,48 @@
-# Possibilistic Inference System
+# Possibilistic & Absurd Reasoning Inference System
 
-This repository contains a **possibilistic inference system** developed during my **first year of Master's studies**. The system is designed to perform **reasoning with weighted knowledge bases** using **CNF (Conjunctive Normal Form) transformations** and a **SAT solver** for inference.
+This repository contains two inference systems developed during my **first year of Master's studies**:
+1. **Possibilistic Inference System**: Uses **weighted knowledge bases** and possibilistic reasoning to evaluate certainty levels.
+2. **Absurd Reasoning System**: Implements **proof by contradiction** (refutation-based inference) using a SAT solver.
 
 ## 📌 Overview
-The goal of this project is to evaluate the **certainty level** of an inferred fact based on a weighted knowledge base. The system processes a list of logical rules, sorts them by confidence levels, and applies **possibilistic reasoning** to determine the strongest inference.
+These systems process a knowledge base in **Conjunctive Normal Form (CNF)** and determine whether a given fact can be inferred.
 
-## 🔍 Key Features
-- **Processes weighted knowledge bases** from a text file.
-- **Transforms logical formulas into CNF format**.
-- **Uses a SAT solver** to check logical consistency.
-- **Implements possibilistic inference** to determine the certainty of a conclusion.
-- **Handles negation** and performs binary search on strata (confidence levels).
+### **Possibilistic Inference System**
+- Uses **weighted knowledge bases** where each rule has a confidence level.
+- Performs **inference using possibilistic logic**.
+- Applies **binary search over confidence levels** to find the minimum certainty threshold.
+- Supports **negation handling** for more precise reasoning.
 
+### **Absurd Reasoning System**
+- Implements **proof by contradiction**.
+- Uses **UBCSAT** as a SAT solver.
+- Adds the **negation of the target fact** to the knowledge base.
+- If the solver detects an inconsistency, the fact is inferred as **logically true**.
+
+## 📂 Repository Structure
+```
+/Inference-Systems
+│── /possibilistic_reasoning  # Code for possibilistic inference
+│── /absurd_reasoning         # Code for proof by contradiction
+│── /UI                       # A simple UI in Tkinter (python)
+│── /Data-Absurd              # Example knowledge bases (CNF format)
+│── /Data-Proba-Inf           # Example knowledge bases for inference
+│── /docs                     # Additional Documentation
+│── README.md                 # Project overview
+```
 
 ## ⚙️ Installation & Usage
 ### Prerequisites
-Ensure you have **Python 3.x** installed along with the required dependencies.
+Ensure you have **Python 3.x** and a SAT solver (**UBCSAT**) installed.
 
-### Running the Inference System
-To execute the system on a knowledge base file:
+### Running the Possibilistic Inference System
 ```sh
 python main.py RCR_BASE.txt target_variable
+```
+
+### Running the Absurd Reasoning System
+```sh
+python absurd_reasoning.py classic_BC/BC-Zoo2.cnf "2 0"
 ```
 
 ## 📜 License
