@@ -1,6 +1,7 @@
 # Possibilistic & Absurd Reasoning Inference System
 
 This repository contains two inference systems developed during my **first year of Master's studies**:
+
 1. **Possibilistic Inference System**: Uses **weighted knowledge bases** and possibilistic reasoning to evaluate certainty levels.
 2. **Absurd Reasoning System**: Implements **proof by contradiction** (refutation-based inference) using a SAT solver.
 
@@ -24,14 +25,15 @@ These systems process a knowledge base in **Conjunctive Normal Form (CNF)** and 
 /Inference-Systems
 │── /possibilistic_reasoning  # Code for possibilistic inference
 │── /absurd_reasoning         # Code for proof by contradiction
-│── /UI                       # A simple UI in Tkinter (python)
+│── /UI                       # A simple UI in Tkinter (Python)
 │── /Data-Absurd              # Example knowledge bases (CNF format)
 │── /Data-Proba-Inf           # Example knowledge bases for inference
-│── /docs                     # Additional Documentation
+│── /docs                     # Additional documentation
 │── README.md                 # Project overview
 ```
 
 ## ⚙️ Installation & Usage
+
 ### Prerequisites
 Ensure you have **Python 3.x** and a SAT solver (**UBCSAT**) installed.
 
